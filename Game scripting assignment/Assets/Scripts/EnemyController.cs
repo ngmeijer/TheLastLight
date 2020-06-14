@@ -49,13 +49,13 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         drawRays(Vector3.forward, enemyStats.maxViewDistance, Color.red, Color.green);
-        drawRays(Vector3.left, 2, Color.red, Color.green);
-        drawRays(Vector3.right, 2, Color.red, Color.green);
+        //drawRays(Vector3.left, 2, Color.red, Color.green);
+        //drawRays(Vector3.right, 2, Color.red, Color.green);
 
         switch (state)
         {
             case State.PATROL:
-
+                patrolState();
                 break;
 
             case State.CHASE:
@@ -68,10 +68,8 @@ public class EnemyController : MonoBehaviour
     {
         if (Physics.Raycast(rayEmitter.position, transform.TransformDirection(direction), out hit, viewRadius))
         {
-            Debug.DrawRay(rayEmitter.position, transform.TransformDirection(direction) * hit.distance, rayColorCollision);
             if (hit.transform.gameObject.layer == groundLayer)
             {
-                //Debug.Log("SHOULD NOT MOVE");
                 hitObstacle = true;
             }
         }
@@ -81,26 +79,27 @@ public class EnemyController : MonoBehaviour
             hitObstacle = false;
         }
 
-        if (!hitObstacle)
-        {
-            //Debug.Log("SHOULD MOVE");
-            //transform.position += new Vector3(1f, 0f, 0f) * Time.deltaTime;
-            Debug.DrawRay(rayEmitter.position, transform.TransformDirection(direction) * viewRadius, rayColorNoCollision);
-        }
-
         if (hitObstacle)
         {
-            transform.Rotate(0f, 5f * Time.deltaTime, 0f);
+            Debug.DrawRay(rayEmitter.position, transform.TransformDirection(direction) * viewRadius, rayColorCollision);
         }
-        else
+
+        if (!hitObstacle)
         {
-            transform.position += new Vector3(1f, 0f, 0f) * Time.deltaTime;
+            Debug.DrawRay(rayEmitter.position, transform.TransformDirection(direction) * viewRadius, rayColorNoCollision);
         }
     }
 
     private void patrolState()
     {
-
+        if (hitObstacle)
+        {
+            transform.Rotate(0f, 1f, 0f);
+        }
+        else
+        {
+            transform.position += transform.forward * Time.deltaTime * 1f;
+        }
     }
 
     private void detectPlayer()
