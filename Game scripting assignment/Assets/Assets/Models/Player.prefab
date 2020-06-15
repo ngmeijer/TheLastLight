@@ -49,7 +49,6 @@ GameObject:
   - component: {fileID: 6015365345817442066}
   - component: {fileID: 6015365345817442068}
   - component: {fileID: 6015365345817442079}
-  - component: {fileID: 726571165818772972}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -99,7 +98,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1134714066672644336, guid: 5bc3e0eb4f6bfba4c9002130bfc1845d, type: 3}
+  - {fileID: -876546973899608171, guid: 04a2f344b70eb1d4da94ba987348da5f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -319,7 +318,7 @@ MonoBehaviour:
   walkSpeed: 6
   sprintSpeed: 9
   moveSpeed: 0
-  rotateSpeed: 90
+  rotateSpeed: 150
   jumpForce: 200
   camNormalPosition: {x: 0, y: 1, z: 0}
   camCrouchPosition: {x: 0, y: 0.5, z: 0}
@@ -337,20 +336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e06a6b97b1203964785bc503c6e10b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &726571165818772972
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6015365345817442057}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6297609013263485980
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,5 +543,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6015365345817442070}
-  rotateSpeed: 100
+  rotateSpeed: 150
   interactKey: 102

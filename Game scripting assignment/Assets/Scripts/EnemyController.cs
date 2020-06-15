@@ -17,7 +17,10 @@ public class EnemyController : MonoBehaviour
 
     private int groundLayer = 9;
 
-    private bool hitObstacle = false;
+    private bool forwardHitObstacle = false;
+    private bool leftHitObstacle = false;
+    private bool rightHitObstacle = false;
+
     private bool hitPlayer = false;
 
     private enum State
@@ -49,8 +52,8 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         drawRays(Vector3.forward, enemyStats.maxViewDistance, Color.red, Color.green);
-        //drawRays(Vector3.left, 2, Color.red, Color.green);
-        //drawRays(Vector3.right, 2, Color.red, Color.green);
+        drawRays(Vector3.left, 2, Color.red, Color.green);
+        drawRays(Vector3.right, 2, Color.red, Color.green);
 
         switch (state)
         {
@@ -70,21 +73,20 @@ public class EnemyController : MonoBehaviour
         {
             if (hit.transform.gameObject.layer == groundLayer)
             {
-                hitObstacle = true;
+                forwardHitObstacle = true;
             }
         }
         else 
         {
-            Debug.Log("Move again");
-            hitObstacle = false;
+            forwardHitObstacle = false;
         }
 
-        if (hitObstacle)
+        if (forwardHitObstacle)
         {
             Debug.DrawRay(rayEmitter.position, transform.TransformDirection(direction) * viewRadius, rayColorCollision);
         }
 
-        if (!hitObstacle)
+        if (!forwardHitObstacle)
         {
             Debug.DrawRay(rayEmitter.position, transform.TransformDirection(direction) * viewRadius, rayColorNoCollision);
         }
@@ -92,9 +94,9 @@ public class EnemyController : MonoBehaviour
 
     private void patrolState()
     {
-        if (hitObstacle)
+        if (forwardHitObstacle)
         {
-            transform.Rotate(0f, 1f, 0f);
+            transform.Rotate(0f, 5f, 0f);
         }
         else
         {

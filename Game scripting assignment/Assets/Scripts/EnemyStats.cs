@@ -8,6 +8,7 @@ public class EnemyStats : MonoBehaviour
 
     [SerializeField] public int maxViewDistance = 1;
     [SerializeField] public float rotateSpeed = 25f;
+    [SerializeField] public float moveSpeed = 2f;
     [SerializeField] public LayerMask playerLayer;
     [SerializeField] public LayerMask groundLayer;
 

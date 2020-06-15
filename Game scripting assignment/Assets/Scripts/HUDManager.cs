@@ -32,20 +32,22 @@ public class HUDManager : MonoBehaviour
     {
         Cursor.visible = false;
 
-        pauseScript = GetComponent<PauseMenu>();
-        inventoryScreen.SetActive(false);
+        //pauseScript = GetComponent<PauseMenu>();
+        //inventoryScreen.SetActive(false);
     }
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         nullChecks();
     }
 
     private void Update()
     {
-        handleMouseVisib();
-        handleInventoryScreen();
-        checkObjectInteraction();
+        Debug.Log(Cursor.lockState);
+        //handleMouseVisib();
+        //handleInventoryScreen();
+        //checkObjectInteraction();
     }
 
     private void handleInventoryScreen()
@@ -68,14 +70,13 @@ public class HUDManager : MonoBehaviour
 
     private void handleMouseVisib()
     {
-        if(!inventoryActive && !pauseScript.PauseMenuActive)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-        }
+        //if (!inventoryActive && !pauseScript.PauseMenuActive)
+        //{
+        //}
+        //else
+        //{
+        //    //Cursor.lockState = CursorLockMode.Confined;
+        //}
     }
 
     private void enableInventory()
