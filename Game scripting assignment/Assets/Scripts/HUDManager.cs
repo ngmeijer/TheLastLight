@@ -44,10 +44,8 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Cursor.lockState);
-        //handleMouseVisib();
         //handleInventoryScreen();
-        //checkObjectInteraction();
+        checkObjectInteraction();
     }
 
     private void handleInventoryScreen()
@@ -68,21 +66,10 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-    private void handleMouseVisib()
-    {
-        //if (!inventoryActive && !pauseScript.PauseMenuActive)
-        //{
-        //}
-        //else
-        //{
-        //    //Cursor.lockState = CursorLockMode.Confined;
-        //}
-    }
-
     private void enableInventory()
     {
         Cursor.visible = true;
-        inventoryScreen.SetActive(true);
+        //inventoryScreen.SetActive(true);
         //Time.timeScale = 0;
         inventoryActive = true;
     }
@@ -99,16 +86,17 @@ public class HUDManager : MonoBehaviour
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, maxInteractionDistance))
         {
             if (hit.collider.gameObject.CompareTag("Interactable") && !Input.GetMouseButton(0))
             {
+                Debug.Log("hit interactable");
                 interactText.enabled = true;
             }
-            else
-            {
-                interactText.enabled = false;
-            }
+        }
+        else
+        {
+            interactText.enabled = false;
         }
     }
 
@@ -116,7 +104,7 @@ public class HUDManager : MonoBehaviour
     {
         if (inventoryScreen == null)
         {
-            Debug.Log("The inventory-screen Gameobject cannot be found. Insert it from the hierarchy into the inspector.");
+            //Debug.Log("The inventory-screen Gameobject cannot be found. Insert it from the hierarchy into the inspector.");
         }
     }
 }

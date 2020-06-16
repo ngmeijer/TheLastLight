@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2367269308264802796}
   - component: {fileID: 2367269308264802797}
   m_Layer: 0
-  m_Name: Cube (39)
+  m_Name: RayEmitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,10 +26,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2367269308264802795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 0.2906, z: 0.644}
-  m_LocalScale: {x: 0.5095884, y: 0.18081707, z: 0.6265653}
+  m_LocalPosition: {x: -0.010000229, y: 0.43, z: 0.644001}
+  m_LocalScale: {x: 0.5095884, y: 0.18081707, z: 0.6265656}
   m_Children: []
-  m_Father: {fileID: 2367269309179851973}
+  m_Father: {fileID: 2367269308738301426}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2367269308264802796
@@ -109,6 +109,7 @@ Transform:
   m_LocalPosition: {x: 20.09, y: 0, z: -31.28}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
+  - {fileID: 2367269308264802794}
   - {fileID: 2367269309179851973}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -164,10 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  maxDistance: 8
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  rayEmitter: {fileID: 0}
 --- !u!1 &2367269309179851970
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,10 +194,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1.0000005}
-  m_Children:
-  - {fileID: 2367269308264802794}
+  m_Children: []
   m_Father: {fileID: 2367269308738301426}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2367269309179851974
 MeshFilter:

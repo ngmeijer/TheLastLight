@@ -173,11 +173,11 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //
-        if (other.gameObject.CompareTag("NewObjective"))
-        {
-            nextObjective++;
-            Destroy(other.gameObject);
-        }
+        //if (other.gameObject.CompareTag("NewObjective"))
+        //{
+        //    nextObjective++;
+        //    Destroy(other.gameObject);
+        //}
     }
 
     public void GoNextObjective()

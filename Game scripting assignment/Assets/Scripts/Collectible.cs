@@ -13,6 +13,8 @@ public class Collectible : MonoBehaviour
 
     [SerializeField] private float throwForce = 25f;
 
+    private Material material;
+
     #endregion
 
     //The object should be NON-STATIC, have a NON-KINEMATIC rigidbody, and a CONVEX mesh collider.
@@ -20,6 +22,8 @@ public class Collectible : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         meshCollider = GetComponent<MeshCollider>();
+        material = GetComponent<Renderer>().material;
+        material.color = Color.blue;
     }
 
     private void OnMouseDown()
@@ -33,6 +37,9 @@ public class Collectible : MonoBehaviour
 
         //Sets the player as parent so it inherits position until mouse release.
         this.transform.parent = objectDestination;
+
+        //Change material
+        material.color = Color.Lerp(Color.blue, Color.red, 1);
     }
 
     private void OnMouseUp()
@@ -45,5 +52,8 @@ public class Collectible : MonoBehaviour
 
         //Removes rotation constraints after the object has been released.
         rb.constraints = RigidbodyConstraints.None;
+
+        //Revert material
+        material.color = Color.Lerp(Color.red, Color.blue, 1);
     }
 }

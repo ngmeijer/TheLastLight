@@ -41,6 +41,6 @@ public class AudioPlayer : MonoBehaviour
     private void nullChecks()
     {
         Debug.Assert(audioSource != null, "The audio source attached to the player is null.");
-        Debug.Assert(footstepSFX != null, "The footsteps audio file in the audio source is null.");
+        //Debug.Assert(footstepSFX != null, "The footsteps audio file in the audio source is null.");
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -11,7 +10,9 @@ public class EnemyController : MonoBehaviour
     private EnemyStats enemyStats = null;
 
     [SerializeField] private GameObject player = null;
-    [SerializeField] private Transform rayEmitter = null;
+    [SerializeField] private GameObject rayEmitter = null;
+
+    private Material material;
 
     private RaycastHit hit;
 
@@ -40,6 +41,9 @@ public class EnemyController : MonoBehaviour
         enemyNavMesh = GetComponent<NavMeshAgent>();
 
         enemyStats = GetComponent<EnemyStats>();
+
+        material = rayEmitter.GetComponent<Renderer>().material;
+        material.color = Color.green;
     }
 
     private void Start()
@@ -52,8 +56,8 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         drawRays(Vector3.forward, enemyStats.maxViewDistance, Color.red, Color.green);
-        drawRays(Vector3.left, 2, Color.red, Color.green);
-        drawRays(Vector3.right, 2, Color.red, Color.green);
+        //drawRays(Vector3.left, 2, Color.red, Color.green);
+        //drawRays(Vector3.right, 2, Color.red, Color.green);
 
         switch (state)
         {
@@ -69,7 +73,7 @@ public class EnemyController : MonoBehaviour
 
     private void drawRays(Vector3 direction, int viewRadius, Color rayColorCollision, Color rayColorNoCollision)
     {
-        if (Physics.Raycast(rayEmitter.position, transform.TransformDirection(direction), out hit, viewRadius))
+        if (Physics.Raycast(rayEmitter.transform.position, transform.TransformDirection(direction), out hit, viewRadius))
         {
             if (hit.transform.gameObject.layer == groundLayer)
             {
@@ -83,12 +87,12 @@ public class EnemyController : MonoBehaviour
 
         if (forwardHitObstacle)
         {
-            Debug.DrawRay(rayEmitter.position, transform.TransformDirection(direction) * viewRadius, rayColorCollision);
+            Debug.DrawRay(rayEmitter.transform.position, transform.TransformDirection(direction) * viewRadius, rayColorCollision);
         }
 
         if (!forwardHitObstacle)
         {
-            Debug.DrawRay(rayEmitter.position, transform.TransformDirection(direction) * viewRadius, rayColorNoCollision);
+            Debug.DrawRay(rayEmitter.transform.position, transform.TransformDirection(direction) * viewRadius, rayColorNoCollision);
         }
     }
 
@@ -96,11 +100,13 @@ public class EnemyController : MonoBehaviour
     {
         if (forwardHitObstacle)
         {
-            transform.Rotate(0f, 5f, 0f);
+            transform.Rotate(0f, Random.Range(-45, 46), 0f);
+            material.color = Color.Lerp(Color.red, Color.blue, 0.5f);
         }
         else
         {
-            transform.position += transform.forward * Time.deltaTime * 1f;
+            transform.position += transform.forward * Time.deltaTime * enemyStats.moveSpeed;
+            material.color = Color.Lerp(Color.red, Color.blue, 1);
         }
     }
 
