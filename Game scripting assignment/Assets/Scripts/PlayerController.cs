@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f;
+            velocity.y = playerSettings.downForce;
         }
 
         float horizontalMove = Input.GetAxis("Horizontal");
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(playerSettings.jumpKey) && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(playerSettings.jumpForce * -0.5f * gravity * Time.deltaTime);
+            velocity.y = Mathf.Sqrt(playerSettings.jumpForce * playerSettings.downForce * gravity * Time.deltaTime);
         }
     }
 

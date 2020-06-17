@@ -12,8 +12,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject player = null;
     [SerializeField] private GameObject rayEmitter = null;
 
-    private Material material;
-
     private RaycastHit hit;
 
     private int groundLayer = 9;
@@ -41,9 +39,6 @@ public class EnemyController : MonoBehaviour
         enemyNavMesh = GetComponent<NavMeshAgent>();
 
         enemyStats = GetComponent<EnemyStats>();
-
-        material = rayEmitter.GetComponent<Renderer>().material;
-        material.color = Color.green;
     }
 
     private void Start()
@@ -101,12 +96,10 @@ public class EnemyController : MonoBehaviour
         if (forwardHitObstacle)
         {
             transform.Rotate(0f, Random.Range(-45, 46), 0f);
-            material.color = Color.Lerp(Color.red, Color.blue, 0.5f);
         }
         else
         {
             transform.position += transform.forward * Time.deltaTime * enemyStats.moveSpeed;
-            material.color = Color.Lerp(Color.red, Color.blue, 1);
         }
     }
 

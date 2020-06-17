@@ -30,6 +30,8 @@ public class PlayerSettings : MonoBehaviour
 
     [SerializeField] public float jumpForce = 100f;
 
+    [SerializeField] public float downForce = -1f;
+
     [SerializeField] public Vector3 camNormalPosition = new Vector3(0f, 1f, 0f);
     [SerializeField] public Vector3 camCrouchPosition = new Vector3(0f, -0.8f, 0f);
     [SerializeField] public Quaternion reverseViewRotation = new Quaternion(0f, 180f, 0f, 0f);
