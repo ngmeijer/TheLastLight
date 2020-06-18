@@ -16,11 +16,9 @@ public class EnemyController : MonoBehaviour
 
     private int groundLayer = 9;
 
-    private bool forwardHitObstacle = false;
-    private bool leftHitObstacle = false;
-    private bool rightHitObstacle = false;
+    private int enemyLayer = 11;
 
-    private bool hitPlayer = false;
+    private bool forwardHitObstacle = false;
 
     private enum State
     {
@@ -71,6 +69,10 @@ public class EnemyController : MonoBehaviour
         if (Physics.Raycast(rayEmitter.transform.position, transform.TransformDirection(direction), out hit, viewRadius))
         {
             if (hit.transform.gameObject.layer == groundLayer)
+            {
+                forwardHitObstacle = true;
+            }
+            if (hit.transform.gameObject.layer == enemyLayer)
             {
                 forwardHitObstacle = true;
             }

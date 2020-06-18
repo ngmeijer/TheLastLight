@@ -56,19 +56,18 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         crouchPlayer();
-        //lookBack();
     }
 
     private void FixedUpdate()
     {
         movePlayer();
         jumpPlayer();
+        rotatePlayer();
         boostPlayer();
     }
 
     private void LateUpdate()
     {
-        rotatePlayer();
     }
 
     #endregion
@@ -100,6 +99,17 @@ public class PlayerController : MonoBehaviour
         }
 
         charController.Move(movementVector * playerSettings.moveSpeed * Time.deltaTime);
+
+        if(verticalMove > 0)
+        {
+            playerAnims.handleRunAnimation();
+        }
+        else
+        {
+            playerAnims.handleIdleAnimation();
+        }
+
+        Debug.Log(verticalMove);
     }
 
     //Check for KeyInput, if true, apply jumpForce to the vertical axis of the Rigidbody.
@@ -131,7 +141,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             playerCamera.transform.localPosition = playerSettings.camNormalPosition;
-            playerAnims.handleIdleAnimation();
             //charController.height = 0.8f;
         }
     }
@@ -141,7 +150,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(playerSettings.dashKey))
         {
             Debug.Log("boosting");
-            
+
         }
     }
 

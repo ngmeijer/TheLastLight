@@ -20,7 +20,14 @@ public class PlayerAnimations : MonoBehaviour
     {
         //Change to event based.
         playerAnim.SetBool("isIdle", true);
+        playerAnim.SetBool("isRunning", false);
         playerAnim.SetBool("isCrouching", false);
+    }
+
+    public void handleRunAnimation()
+    {
+        playerAnim.SetBool("isRunning", true);
+        playerAnim.SetBool("isIdle", false);
     }
 
     public void handleCrouchAnimation()
