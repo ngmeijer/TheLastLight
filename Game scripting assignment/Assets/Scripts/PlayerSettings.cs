@@ -30,6 +30,8 @@ public class PlayerSettings : MonoBehaviour
 
     [SerializeField] public float jumpForce = 100f;
 
+    [SerializeField] public float boostPower = 5f;
+
     [SerializeField] public float downForce = -1f;
 
     [SerializeField] public Vector3 camNormalPosition = new Vector3(0f, 1f, 0f);

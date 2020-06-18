@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         movePlayer();
         jumpPlayer();
-        dashPlayer();
+        boostPlayer();
     }
 
     private void LateUpdate()
@@ -135,11 +136,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void dashPlayer()
+    private void boostPlayer()
     {
-        if (Input.GetKey(playerSettings.dashKey))
+        if (Input.GetKeyDown(playerSettings.dashKey))
         {
-
+            Debug.Log("boosting");
+            
         }
     }
 
