@@ -28,7 +28,7 @@ public class Collectible : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //meshCollider.enabled = false;
+        meshCollider.enabled = false;
         rb.useGravity = false;
 
         //Freezes rotation, otherwise it will rotate unneccesarily.
@@ -47,8 +47,6 @@ public class Collectible : MonoBehaviour
         this.transform.parent = null;
         rb.useGravity = true;
         meshCollider.enabled = true;
-
-        //rb.AddForce(throwForce, 0f, 0f, ForceMode.Impulse);
 
         //Removes rotation constraints after the object has been released.
         rb.constraints = RigidbodyConstraints.None;

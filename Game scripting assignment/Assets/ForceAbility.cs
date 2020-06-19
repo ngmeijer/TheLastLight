@@ -31,15 +31,23 @@ public class ForceAbility : MonoBehaviour
 
     private void blowObjectsAway()
     {
+        if (Input.GetKeyDown(playerSettings.explosionAbilityKey))
+        {
+            animScript.handleCameraShakeAnimation();
+        }
+        if (Input.GetKeyUp(playerSettings.explosionAbilityKey))
+        {
+            animScript.playerAnim.SetBool("cameraShaking", false);
+        }
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, playerSettings.forceRadius);
 
         foreach (Collider closeObjects in colliders)
         {
             Rigidbody rb = closeObjects.GetComponent<Rigidbody>();
 
-            if (Input.GetKeyDown(playerSettings.explosionAbilityKey))
+            if (Input.GetKeyUp(playerSettings.explosionAbilityKey))
             {
-                animScript.handleCameraShakeAnimation();
                 if (rb != null)
                 {
                     rb.AddExplosionForce(playerSettings.explosionForce, transform.position, playerSettings.forceRadius, 100f, ForceMode.Impulse);

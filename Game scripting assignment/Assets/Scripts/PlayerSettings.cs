@@ -37,6 +37,7 @@ public class PlayerSettings : MonoBehaviour
 
     [SerializeField] public float forceRadius = 1f;
     [SerializeField] public float explosionForce = 500f;
+    [SerializeField] public float maxExplosionForce = 1500f;
 
     [SerializeField] public Vector3 camNormalPosition = new Vector3(0f, 1f, 0f);
     [SerializeField] public Vector3 camCrouchPosition = new Vector3(0f, -0.8f, 0f);

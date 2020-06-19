@@ -66,10 +66,6 @@ public class PlayerController : MonoBehaviour
         boostPlayer();
     }
 
-    private void LateUpdate()
-    {
-    }
-
     #endregion
 
     #region Movement related methods

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    private Animator playerAnim = null;
+    public Animator playerAnim = null;
 
     private void Awake()
     {
@@ -44,7 +44,6 @@ public class PlayerAnimations : MonoBehaviour
     public void handleCameraShakeAnimation()
     {
         playerAnim.SetBool("cameraShaking", true);
-        playerAnim.SetBool("isIdle", false);
     }
 
     private void nullChecks()
