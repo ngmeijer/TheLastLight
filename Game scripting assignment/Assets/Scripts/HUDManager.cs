@@ -90,7 +90,6 @@ public class HUDManager : MonoBehaviour
         {
             if (hit.collider.gameObject.CompareTag("Interactable") && !Input.GetMouseButton(0))
             {
-                Debug.Log("hit interactable");
                 interactText.enabled = true;
             }
         }

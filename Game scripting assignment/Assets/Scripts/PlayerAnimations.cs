@@ -41,6 +41,12 @@ public class PlayerAnimations : MonoBehaviour
 
     }
 
+    public void handleCameraShakeAnimation()
+    {
+        playerAnim.SetBool("cameraShaking", true);
+        playerAnim.SetBool("isIdle", false);
+    }
+
     private void nullChecks()
     {
         Debug.Assert(playerAnim != null, "The playerAnim component is null. Check the GetComponent, or serialize it to show in the inspector and drag it in.");

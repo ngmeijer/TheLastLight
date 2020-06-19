@@ -14,6 +14,7 @@ public class PlayerSettings : MonoBehaviour
     [SerializeField] public KeyCode reverseViewKey = KeyCode.Q;
     [SerializeField] public KeyCode dashKey = KeyCode.CapsLock;
     [SerializeField] public KeyCode activateInventoryKey = KeyCode.Tab;
+    [SerializeField] public KeyCode explosionAbilityKey = KeyCode.E;
 
     //------------------------------------------------------------------//
 
@@ -33,6 +34,9 @@ public class PlayerSettings : MonoBehaviour
     [SerializeField] public float boostPower = 5f;
 
     [SerializeField] public float downForce = -1f;
+
+    [SerializeField] public float forceRadius = 1f;
+    [SerializeField] public float explosionForce = 500f;
 
     [SerializeField] public Vector3 camNormalPosition = new Vector3(0f, 1f, 0f);
     [SerializeField] public Vector3 camCrouchPosition = new Vector3(0f, -0.8f, 0f);

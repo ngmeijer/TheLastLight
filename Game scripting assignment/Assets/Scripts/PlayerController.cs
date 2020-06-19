@@ -108,8 +108,6 @@ public class PlayerController : MonoBehaviour
         {
             playerAnims.handleIdleAnimation();
         }
-
-        Debug.Log(verticalMove);
     }
 
     //Check for KeyInput, if true, apply jumpForce to the vertical axis of the Rigidbody.
@@ -149,7 +147,6 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(playerSettings.dashKey))
         {
-            Debug.Log("boosting");
 
         }
     }

@@ -17,7 +17,6 @@ public class MenuLighting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(RenderSettings.fogColor);
         if (redToBlue)
         {
             RenderSettings.fogColor = Color.Lerp(Color.red, Color.blue, Mathf.PingPong(Time.time * 0.2f, 1));
