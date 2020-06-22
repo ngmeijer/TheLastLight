@@ -8,11 +8,15 @@ public class HUDManager : MonoBehaviour
 {
     #region Variables
 
-    private PauseMenu pauseScript = null;
-
     [SerializeField] private GameObject inventoryScreen = null;
 
     [SerializeField] private TextMeshProUGUI interactText = null;
+
+    [SerializeField] private TextMeshProUGUI objectivesCollected = null;
+
+    public TextMeshProUGUI timerText = null;
+    private SelfDestruct playerDestroy = null;
+    private GameManager gameManager = null;
 
     private Ray ray;
     private RaycastHit hit;
@@ -39,6 +43,8 @@ public class HUDManager : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        playerDestroy = GameObject.Find("Player").GetComponent<SelfDestruct>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         nullChecks();
     }
 
@@ -46,6 +52,7 @@ public class HUDManager : MonoBehaviour
     {
         //handleInventoryScreen();
         checkObjectInteraction();
+        ShowTimer();
     }
 
     private void handleInventoryScreen()
@@ -99,11 +106,22 @@ public class HUDManager : MonoBehaviour
         }
     }
 
+    private void trackObjectiveCount()
+    {
+        objectivesCollected.text = "Objectives collected: " + gameManager.currentObjectiveCount;
+    }
+
+    public void ShowTimer()
+    {
+        if (playerDestroy.startTimer)
+        {
+            timerText.text = "Time left alive: " + playerDestroy.timer.ToString("f2");
+            trackObjectiveCount();
+        }
+    }
+
     private void nullChecks()
     {
-        if (inventoryScreen == null)
-        {
-            //Debug.Log("The inventory-screen Gameobject cannot be found. Insert it from the hierarchy into the inspector.");
-        }
+        
     }
 }

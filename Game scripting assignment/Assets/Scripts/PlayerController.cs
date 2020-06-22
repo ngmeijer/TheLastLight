@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player components")]
 
     private CharacterController charController = null;
+    private SelfDestruct selfDestruct = null;
 
     [SerializeField] private Camera playerCamera = null;
 
@@ -44,26 +45,21 @@ public class PlayerController : MonoBehaviour
         charController = GetComponent<CharacterController>();
         playerSettings = GetComponent<PlayerSettings>();
         playerAnims = GetComponent<PlayerAnimations>();
+        selfDestruct = GetComponent<SelfDestruct>();
+        Cursor.visible = false;
     }
 
     private void Start()
     {
-        Cursor.visible = false;
-
         nullChecks();
     }
 
     private void Update()
     {
         crouchPlayer();
-    }
-
-    private void FixedUpdate()
-    {
         movePlayer();
         jumpPlayer();
         rotatePlayer();
-        boostPlayer();
     }
 
     #endregion
@@ -96,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         charController.Move(movementVector * playerSettings.moveSpeed * Time.deltaTime);
 
-        if(verticalMove > 0)
+        if (verticalMove > 0)
         {
             playerAnims.handleRunAnimation();
         }
@@ -139,11 +135,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void boostPlayer()
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKeyDown(playerSettings.dashKey))
+        if (other.gameObject.CompareTag("Death"))
         {
-
+            selfDestruct.resetLevel = true;
         }
     }
 
@@ -159,35 +155,7 @@ public class PlayerController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseHorizontal);
     }
 
-    //Have to rework this function. 
-    private void lookBack()
-    {
-        if (Input.GetKey(playerSettings.reverseViewKey))
-        {
-            playerCamera.transform.localRotation = playerSettings.reverseViewRotation;
-        }
-        if (Input.GetKeyUp(playerSettings.reverseViewKey))
-        {
-            playerCamera.transform.localRotation = playerSettings.normalViewRotation;
-        }
-    }
-
     #endregion
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //
-        //if (other.gameObject.CompareTag("NewObjective"))
-        //{
-        //    nextObjective++;
-        //    Destroy(other.gameObject);
-        //}
-    }
-
-    public void GoNextObjective()
-    {
-
-    }
 
     //Wrote this method to satisfy part of the "Excellent" criteria in the rubric.
     private void nullChecks()

@@ -22,8 +22,9 @@ public class PlayerSettings : MonoBehaviour
 
     //------------------------------------------------------------------//
     [Header("Movement values")]
-    [SerializeField] public float walkSpeed = 2.5f;
-    [SerializeField] public float sprintSpeed = 5f;
+    [SerializeField] public float walkSpeed = 4f;
+    [SerializeField] public float sprintSpeed = 8f;
+    [SerializeField] public float speedIncrease = 1;
 
     public float moveSpeed = 0f;
 
@@ -38,6 +39,7 @@ public class PlayerSettings : MonoBehaviour
     [SerializeField] public float forceRadius = 1f;
     [SerializeField] public float explosionForce = 500f;
     [SerializeField] public float maxExplosionForce = 1500f;
+    [SerializeField] public float maxTimeAlive;
 
     [SerializeField] public Vector3 camNormalPosition = new Vector3(0f, 1f, 0f);
     [SerializeField] public Vector3 camCrouchPosition = new Vector3(0f, -0.8f, 0f);

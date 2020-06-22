@@ -8,6 +8,7 @@ TagManager:
   - InteractionHitbox
   - NewObjective
   - Pickup
+  - Death
   layers:
   - Default
   - TransparentFX
