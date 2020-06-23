@@ -8,6 +8,8 @@ public class HUDManager : MonoBehaviour
 {
     #region Variables
 
+    private Animator canvasAnim = null;
+
     [SerializeField] private GameObject inventoryScreen = null;
 
     [SerializeField] private TextMeshProUGUI interactText = null;
@@ -40,6 +42,7 @@ public class HUDManager : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        canvasAnim = GetComponentInParent<Animator>();
         playerDestroy = GameObject.Find("Player").GetComponent<SelfDestruct>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         tutColliderCheck = GameObject.FindGameObjectWithTag("InteractionHitbox").GetComponent<CheckTutorialReqs>();
@@ -51,6 +54,7 @@ public class HUDManager : MonoBehaviour
         //handleInventoryScreen();
         checkObjectInteraction();
         ShowTimer();
+        checkTutorialCol();
     }
 
     private void handleInventoryScreen()
@@ -120,14 +124,15 @@ public class HUDManager : MonoBehaviour
 
     private void checkTutorialCol()
     {
-        if (tutColliderCheck.setTextActive)
-        {
-            Debug.Log("Hit tutorial");
+        if (tutColliderCheck.setTextActive) 
+        { 
+            canvasAnim.SetTrigger("hitObjective");
         }
+        else return;
     }
 
     private void nullChecks()
     {
-        
+
     }
 }

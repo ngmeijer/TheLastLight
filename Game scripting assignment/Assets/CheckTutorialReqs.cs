@@ -25,6 +25,7 @@ public class CheckTutorialReqs : MonoBehaviour
             {
                 setTextActive = true;
                 hasHit = true;
+                Debug.Log("hit player");
             }
         }
     }
