@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class ForceAbility : MonoBehaviour
 {
     #region Variables
 
     private PlayerSettings playerSettings = null;
-
     private PlayerAnimations animScript = null;
-
     [SerializeField] private GameObject player = null;
-
     private AudioSource forceAudio = null;
 
     #endregion
 
-    void Awake()
+    private void Awake()
     {
         if (player != null)
         {
@@ -27,7 +25,12 @@ public class ForceAbility : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Start()
+    {
+        nullChecks();
+    }
+
+    private void Update()
     {
         blowObjectsAway();
     }
@@ -63,6 +66,7 @@ public class ForceAbility : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        //Shows the force radius/range in which the cubes will be affected in scene view.
         if (playerSettings == null)
         {
             return;
@@ -72,5 +76,13 @@ public class ForceAbility : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, playerSettings.forceRadius);
         }
+    }
+
+    private void nullChecks()
+    {
+        Debug.Assert(player != null, "Player GameObject could not be found.");
+        Debug.Assert(animScript != null, "Player Animator component could not be found.");
+        Debug.Assert(forceAudio != null, "Gameobject's Audio Source could not be found.");
+        Debug.Assert(playerSettings != null, "The Players' PlayerSettings script could not be found.");
     }
 }

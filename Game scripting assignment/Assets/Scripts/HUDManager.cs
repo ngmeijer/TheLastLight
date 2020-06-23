@@ -4,22 +4,22 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(PauseMenu))]
+[RequireComponent(typeof(Animator))]
 public class HUDManager : MonoBehaviour
 {
     #region Variables
 
+    private SelfDestruct playerDestroy = null;
+    private GameManager gameManager = null;
+    private PauseMenu pauseScript = null;
+    private CheckTutorialReqs tutColliderCheck = null;
+
     private Animator canvasAnim = null;
 
     [SerializeField] private GameObject inventoryScreen = null;
-
     [SerializeField] private TextMeshProUGUI interactText = null;
-
     [SerializeField] private TextMeshProUGUI objectivesCollected = null;
-
     public TextMeshProUGUI timerText = null;
-    private SelfDestruct playerDestroy = null;
-    private GameManager gameManager = null;
-    private CheckTutorialReqs tutColliderCheck = null;
 
     private Ray ray;
     private RaycastHit hit;
@@ -27,68 +27,41 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private int maxInteractionDistance = 5;
 
     private bool inventoryActive;
-    private bool interactTextActive = false;
 
     #endregion
 
     private void Awake()
     {
-        Cursor.visible = false;
+        pauseScript = GetComponent<PauseMenu>();
+        canvasAnim = GetComponentInParent<Animator>();
 
-        //pauseScript = GetComponent<PauseMenu>();
-        //inventoryScreen.SetActive(false);
+        playerDestroy = GameObject.Find("Player").GetComponent<SelfDestruct>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        tutColliderCheck = GameObject.FindGameObjectWithTag("InteractionHitbox").GetComponent<CheckTutorialReqs>();
     }
 
     private void Start()
     {
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        canvasAnim = GetComponentInParent<Animator>();
-        playerDestroy = GameObject.Find("Player").GetComponent<SelfDestruct>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        tutColliderCheck = GameObject.FindGameObjectWithTag("InteractionHitbox").GetComponent<CheckTutorialReqs>();
+
         nullChecks();
+    }
+
+    private void nullChecks()
+    {
+        Debug.Assert(pauseScript != null, "The PauseMenu script is not attached to the HUD GameObject.");
+        Debug.Assert(canvasAnim != null, "There is no Animator component attached to the Canvas GameObject.");
+        Debug.Assert(playerDestroy != null, "There is no SelfDestruct script component attached to the Player GameObject.");
+        Debug.Assert(gameManager != null, "There is no GameManager script component attached to the GameManager GameObject.");
+        Debug.Assert(tutColliderCheck != null, "There is no CheckTutorialReqs script component attached to the ObjectiveHolder GameObject, or it is not tagged with 'InteractionHitbox'.");
     }
 
     private void Update()
     {
-        //handleInventoryScreen();
         checkObjectInteraction();
         ShowTimer();
         checkTutorialCol();
-    }
-
-    private void handleInventoryScreen()
-    {
-        if (inventoryScreen != null)
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                if (inventoryActive)
-                {
-                    disableInventory();
-                }
-                else
-                {
-                    enableInventory();
-                }
-            }
-        }
-    }
-
-    private void enableInventory()
-    {
-        Cursor.visible = true;
-        //inventoryScreen.SetActive(true);
-        //Time.timeScale = 0;
-        inventoryActive = true;
-    }
-
-    private void disableInventory()
-    {
-        Cursor.visible = false;
-        inventoryScreen.SetActive(false);
-        //Time.timeScale = 1;
-        inventoryActive = false;
     }
 
     private void checkObjectInteraction()
@@ -131,8 +104,4 @@ public class HUDManager : MonoBehaviour
         else return;
     }
 
-    private void nullChecks()
-    {
-
-    }
 }

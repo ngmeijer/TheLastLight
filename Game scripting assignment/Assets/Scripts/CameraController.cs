@@ -48,6 +48,7 @@ public class CameraController : MonoBehaviour
         }
 
         //Remove "-" to invert look direction.
+        //Also make this an option in the pause menu.
         transform.Rotate(-verticalLook, 0f, 0f);
     }
 

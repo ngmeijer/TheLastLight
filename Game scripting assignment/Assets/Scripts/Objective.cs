@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class Objective : MonoBehaviour
 {
+    #region Variables
+
     private GameManager gameManager = null;
     private PlayerSettings playerSettings = null;
 
-    void Start()
+    #endregion
+
+    private void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerSettings = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSettings>();
+    }
+
+    private void Start()
+    {
+        nullChecks();
+    }
+
+    private void nullChecks()
+    {
+        Debug.Assert(gameManager != null, "There is no GameManager script component attached to the GameManager GameObject.");
+        Debug.Assert(playerSettings != null, "There is no PlayerSettings script component attached to the GameObject tagged with 'Player'.");
     }
 
     private void OnTriggerEnter(Collider other)

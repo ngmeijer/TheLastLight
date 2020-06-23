@@ -3,17 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private SelfDestruct playerReset = null;
+    #region Variables
 
+    private SelfDestruct playerReset = null;
     public int currentObjectiveCount = 0;
     public int maxObjectiveCount = 7;
 
-    void Start()
+    #endregion
+
+    private void Awake()
     {
         playerReset = GameObject.FindGameObjectWithTag("Player").GetComponent<SelfDestruct>();
     }
 
-    void Update()
+    private void Start()
+    {
+        nullChecks();
+    }
+
+    private void Update()
     {
         trackLevelReset();
         trackObjectiveCount();
@@ -34,5 +42,10 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
         }
+    }
+
+    private void nullChecks()
+    {
+        Debug.Assert(playerReset != null, "The SelfDestruct script on the Player GameObject could not be found.");
     }
 }

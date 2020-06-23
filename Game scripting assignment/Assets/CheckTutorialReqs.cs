@@ -7,16 +7,6 @@ public class CheckTutorialReqs : MonoBehaviour
     public bool hasHit = false;
     public bool setTextActive = false;
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (!hasHit)
