@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     private SelfDestruct playerReset = null;
 
     public int currentObjectiveCount = 0;
-    public int maxObjectiveCount = 6;
+    public int maxObjectiveCount = 7;
 
     void Start()
     {

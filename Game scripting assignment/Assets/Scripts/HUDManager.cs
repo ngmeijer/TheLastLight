@@ -17,6 +17,7 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI timerText = null;
     private SelfDestruct playerDestroy = null;
     private GameManager gameManager = null;
+    private CheckTutorialReqs tutColliderCheck = null;
 
     private Ray ray;
     private RaycastHit hit;
@@ -25,10 +26,6 @@ public class HUDManager : MonoBehaviour
 
     private bool inventoryActive;
     private bool interactTextActive = false;
-    public bool SetInteractTextActive()
-    {
-        return interactTextActive;
-    }
 
     #endregion
 
@@ -45,6 +42,7 @@ public class HUDManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         playerDestroy = GameObject.Find("Player").GetComponent<SelfDestruct>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        tutColliderCheck = GameObject.FindGameObjectWithTag("InteractionHitbox").GetComponent<CheckTutorialReqs>();
         nullChecks();
     }
 
@@ -117,6 +115,14 @@ public class HUDManager : MonoBehaviour
         {
             timerText.text = "Time left alive: " + playerDestroy.timer.ToString("f2");
             trackObjectiveCount();
+        }
+    }
+
+    private void checkTutorialCol()
+    {
+        if (tutColliderCheck.setTextActive)
+        {
+            Debug.Log("Hit tutorial");
         }
     }
 
