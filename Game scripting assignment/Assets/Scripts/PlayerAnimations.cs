@@ -28,12 +28,14 @@ public class PlayerAnimations : MonoBehaviour
     {
         playerAnim.SetBool("isRunning", true);
         playerAnim.SetBool("isIdle", false);
+        playerAnim.SetBool("isCrouching", false);
     }
 
     public void handleCrouchAnimation()
     {
         playerAnim.SetBool("isCrouching", true);
         playerAnim.SetBool("isIdle", false);
+        playerAnim.SetBool("isRunning", false);
     }
 
     private void handleJumpAnimation()

@@ -12838,7 +12838,13 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7268329625070038520, guid: fdbd65422cb21c94c8bdafd84efa8daa, type: 3}
+    - {fileID: 7068976637967474723, guid: fdbd65422cb21c94c8bdafd84efa8daa, type: 3}
+    - {fileID: 7068976637662940790, guid: fdbd65422cb21c94c8bdafd84efa8daa, type: 3}
+    - {fileID: 7068976638440163590, guid: fdbd65422cb21c94c8bdafd84efa8daa, type: 3}
+    - {fileID: 7068976637850860840, guid: fdbd65422cb21c94c8bdafd84efa8daa, type: 3}
+    - {fileID: 7068976637689057568, guid: fdbd65422cb21c94c8bdafd84efa8daa, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fdbd65422cb21c94c8bdafd84efa8daa, type: 3}
 --- !u!224 &7073154984248212003
 RectTransform:
