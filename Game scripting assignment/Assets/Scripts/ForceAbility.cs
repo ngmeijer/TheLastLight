@@ -54,7 +54,7 @@ public class ForceAbility : MonoBehaviour
 
             if (Input.GetKeyUp(playerSettings.explosionAbilityKey))
             {
-                if (rb != null)
+                if (rb != null && !rb.gameObject.CompareTag("Player"))
                 {
                     forceAudio.Play();
                     //rb.AddExplosionForce(playerSettings.explosionForce, transform.position, playerSettings.forceRadius, 100f, ForceMode.Impulse);

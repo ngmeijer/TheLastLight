@@ -6,25 +6,12 @@ public class BouncePad : MonoBehaviour
 {
     #region Variables
 
-
+    [SerializeField] private int bounceForce = 500;
 
     #endregion
 
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-
-    }
-
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 1000f);
-        }
+        other.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * bounceForce);
     }
 }

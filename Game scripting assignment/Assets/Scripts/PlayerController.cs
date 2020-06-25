@@ -80,8 +80,10 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalMove = Input.GetAxis("Horizontal");
         float verticalMove = Input.GetAxis("Vertical");
-        Vector3 movementVector = new Vector3(horizontalMove, 0.0f, verticalMove) * 6f * Time.deltaTime;
+
+        Vector3 movementVector = new Vector3(horizontalMove, 0.0f, verticalMove) * playerSettings.moveSpeed * Time.deltaTime;
         Vector3 newPosition = rb.position + rb.transform.TransformDirection(movementVector);
+
         rb.MovePosition(newPosition);
 
         //Movement for characterController (ASK AT ASSESSMENT WHAT'S BEST FOR FPS GAMES!)
