@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(PlayerSettings))]
 [RequireComponent(typeof(PlayerAnimations))]
@@ -13,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player components")]
 
     private CharacterController charController = null;
+    private Rigidbody rb = null;
     private SelfDestruct selfDestruct = null;
 
     [SerializeField] private Camera playerCamera = null;
@@ -39,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        charController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
         playerSettings = GetComponent<PlayerSettings>();
         playerAnims = GetComponent<PlayerAnimations>();
         selfDestruct = GetComponent<SelfDestruct>();
@@ -54,7 +52,7 @@ public class PlayerController : MonoBehaviour
     //Wrote this method to satisfy part of the "Excellent" criteria in the rubric.
     private void nullChecks()
     {
-        Debug.Assert(charController != null, "The player's CharacterController cannot be found.");
+        Debug.Assert(rb != null, "The player's RigidBody cannot be found.");
         Debug.Assert(groundCheck != null, "The player's GroundCheck child-object is null. This means the player won't know if he's standing on the ground or not, so jumping is disabled.");
         Debug.Assert(playerCamera != null, "The player's Camera is null. You shouldn't be able to see shit.");
         Debug.Assert(playerSettings != null, "The PlayerSettings script is null. Check the GetComponent, or serialize it to show in the inspector and drag it in.");
@@ -65,9 +63,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         crouchPlayer();
+        rotatePlayer();
+    }
+
+    private void FixedUpdate()
+    {
         movePlayer();
         jumpPlayer();
-        rotatePlayer();
     }
 
     #endregion
@@ -76,17 +78,21 @@ public class PlayerController : MonoBehaviour
 
     private void movePlayer()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = playerSettings.downForce;
-        }
-
         float horizontalMove = Input.GetAxis("Horizontal");
         float verticalMove = Input.GetAxis("Vertical");
+        Vector3 movementVector = new Vector3(horizontalMove, 0.0f, verticalMove) * 6f * Time.deltaTime;
+        Vector3 newPosition = rb.position + rb.transform.TransformDirection(movementVector);
+        rb.MovePosition(newPosition);
 
-        Vector3 movementVector = transform.right * horizontalMove + transform.forward * verticalMove;
+        //Movement for characterController (ASK AT ASSESSMENT WHAT'S BEST FOR FPS GAMES!)
+        //Vector3 movementVector = transform.right * horizontalMove + transform.forward * verticalMove;
+        //charController.Move(movementVector * playerSettings.moveSpeed * Time.deltaTime);
+
+        //if (isGrounded && velocity.y < 0)
+        //{
+        //    velocity.y = playerSettings.downForce;
+        //}
+
 
         if (Input.GetKey(playerSettings.sprintKey))
         {
@@ -97,7 +103,6 @@ public class PlayerController : MonoBehaviour
             playerSettings.moveSpeed = playerSettings.walkSpeed;
         }
 
-        charController.Move(movementVector * playerSettings.moveSpeed * Time.deltaTime);
 
         if (verticalMove > 0)
         {
@@ -111,15 +116,26 @@ public class PlayerController : MonoBehaviour
 
     private void jumpPlayer()
     {
-        //Yes, I followed a tutorial from Brackeys for this.
-        velocity.y += gravity * Time.deltaTime;
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        charController.Move(velocity * Time.deltaTime);
-
-        if (Input.GetKey(playerSettings.jumpKey) && isGrounded)
+        if (isGrounded)
         {
-            velocity.y = Mathf.Sqrt(playerSettings.jumpForce * playerSettings.downForce * gravity * Time.deltaTime);
+            if (Input.GetKey(playerSettings.jumpKey))
+            {
+                Vector3 jumpVector = new Vector3(0.0f, playerSettings.jumpForce, 0.0f) * Time.deltaTime;
+                rb.AddForce(jumpVector);
+            }
         }
+
+        //CharacterController jumping
+        //velocity.y += gravity * Time.deltaTime;
+
+        ////charController.Move(velocity * Time.deltaTime);
+
+        //if (Input.GetKey(playerSettings.jumpKey) && isGrounded)
+        //{
+        //    velocity.y = Mathf.Sqrt(playerSettings.jumpForce * playerSettings.downForce * gravity * Time.deltaTime);
+        //}
     }
 
     private void crouchPlayer()
