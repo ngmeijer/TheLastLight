@@ -16,7 +16,6 @@ public class HUDManager : MonoBehaviour
 
     private Animator canvasAnim = null;
 
-    [SerializeField] private GameObject inventoryScreen = null;
     [SerializeField] private TextMeshProUGUI interactText = null;
     [SerializeField] private TextMeshProUGUI objectivesCollected = null;
     public TextMeshProUGUI timerText = null;

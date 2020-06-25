@@ -18,7 +18,7 @@ public class Collectible : MonoBehaviour
     #endregion
 
     //The object should be NON-STATIC, have a NON-KINEMATIC rigidbody, and a CONVEX mesh collider.
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         meshCollider = GetComponent<MeshCollider>();

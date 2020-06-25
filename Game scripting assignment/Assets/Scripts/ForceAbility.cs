@@ -58,7 +58,7 @@ public class ForceAbility : MonoBehaviour
                 {
                     forceAudio.Play();
                     //rb.AddExplosionForce(playerSettings.explosionForce, transform.position, playerSettings.forceRadius, 100f, ForceMode.Impulse);
-                    rb.AddRelativeForce(Vector3.forward * playerSettings.explosionForce, ForceMode.Impulse);
+                    rb.AddRelativeForce(Vector3.up * playerSettings.explosionForce, ForceMode.Impulse);
                 }
             }
         }
